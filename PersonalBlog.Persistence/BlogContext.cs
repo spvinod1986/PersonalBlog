@@ -9,11 +9,11 @@ namespace PersonalBlog.Persistence
     {
         private readonly IMongoDatabase _database = null;
 
-        public BlogContext(IOptions<BlogContextSettings> settings)
+        public BlogContext(IOptions<BlogContextOptions> options)
         {
-            var client = new MongoClient(settings.Value.ConnectionString);
+            var client = new MongoClient(options.Value.ConnectionString);
             if (client != null)
-                _database = client.GetDatabase(settings.Value.Database);
+                _database = client.GetDatabase(options.Value.Database);
         }
 
         public IMongoCollection<Blog> Blogs
@@ -22,16 +22,6 @@ namespace PersonalBlog.Persistence
             {
                 return _database.GetCollection<Blog>("Blogs");
             }
-        }
-
-        public async Task DeleteDatabase(string databaseName)
-        {
-            await _database.Client.DropDatabaseAsync(databaseName);
-        }
-
-        public async Task DeleteCollection(string collectionName)
-        {
-            await _database.DropCollectionAsync(collectionName);
         }
     }
 }

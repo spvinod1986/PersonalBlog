@@ -15,7 +15,7 @@ namespace PersonalBlog.Business.Tests
         }
         void IDisposable.Dispose()
         {
-            Task.FromResult(BlogContextFactory.Destroy(Context));
+            BlogContextFactory.Destroy(Context);
         }
     }
 }

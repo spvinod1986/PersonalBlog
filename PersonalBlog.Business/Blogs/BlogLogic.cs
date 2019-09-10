@@ -21,9 +21,9 @@ namespace PersonalBlog.Business.Blogs
             return blog;
         }
 
-        public async Task<bool> DeleteAsync(Blog blog)
+        public async Task<bool> DeleteAsync(string blogId)
         {
-            var filter = Builders<Blog>.Filter.Where(b => b.Id == blog.Id);
+            var filter = Builders<Blog>.Filter.Where(b => b.Id == blogId);
 
             await _context.Blogs.DeleteOneAsync(filter);
             return true;
@@ -39,12 +39,13 @@ namespace PersonalBlog.Business.Blogs
             return await _context.Blogs.AsQueryable<Blog>().Where(b => b.Id == blogId).FirstOrDefaultAsync();
         }
 
-        public async Task<bool> UpdateAsync(Blog blog)
+        public async Task<bool> UpdateAsync(string blogId, Blog blog)
         {
-            var filter = Builders<Blog>.Filter.Where(b => b.Id == blog.Id);
+            var filter = Builders<Blog>.Filter.Where(b => b.Id == blogId);
 
             await _context.Blogs.ReplaceOneAsync(filter, blog);
             return true;
         }
+
     }
 }

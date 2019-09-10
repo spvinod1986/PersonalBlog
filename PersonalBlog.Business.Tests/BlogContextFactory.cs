@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 using PersonalBlog.Persistence;
 
 namespace PersonalBlog.Business.Tests
@@ -8,7 +9,10 @@ namespace PersonalBlog.Business.Tests
     {
         public static BlogContext Create()
         {
-            var options = Options.Create(new BlogContextSettings
+            // Drop test database
+            DeleteDatabase(TestSetting.ConnectionString, TestSetting.Database);
+
+            var options = Options.Create(new BlogContextOptions
             {
                 ConnectionString = TestSetting.ConnectionString,
                 Database = TestSetting.Database
@@ -17,10 +21,16 @@ namespace PersonalBlog.Business.Tests
             return new BlogContext(options);
         }
 
-        public static async Task Destroy(BlogContext context)
+        public static void Destroy(BlogContext context)
         {
-            await context.DeleteDatabase(TestSetting.Database);
+            DeleteDatabase(TestSetting.ConnectionString, TestSetting.Database);
             context = null;
+        }
+
+        private static void DeleteDatabase(string connectionString, string databaseName)
+        {
+            var client = new MongoClient(connectionString);
+            client.DropDatabase(databaseName);
         }
     }
 }

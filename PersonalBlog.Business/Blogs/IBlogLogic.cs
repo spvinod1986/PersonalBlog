@@ -9,7 +9,7 @@ namespace PersonalBlog.Business.Blogs
         Task<List<Blog>> GetAsync();
         Task<Blog> GetAsync(string blogId);
         Task<Blog> CreateAsync(Blog blog);
-        Task<bool> UpdateAsync(Blog blog);
-        Task<bool> DeleteAsync(Blog blog);
+        Task<bool> UpdateAsync(string blogId, Blog blog);
+        Task<bool> DeleteAsync(string blogId);
     }
 }
