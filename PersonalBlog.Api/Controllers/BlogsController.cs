@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using PersonalBlog.Business.Blogs;
 using PersonalBlog.Domain.Models;
 
-namespace PersonalBlog.Web.Controllers
+namespace PersonalBlog.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

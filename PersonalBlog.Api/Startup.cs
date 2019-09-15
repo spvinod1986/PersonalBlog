@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PersonalBlog.Business.Blogs;
 using PersonalBlog.Persistence;
 
-namespace PersonalBlog.Web
+namespace PersonalBlog.Api
 {
     public class Startup
     {
