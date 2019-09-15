@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalBlog.Web", "PersonalBlog.Web\PersonalBlog.Web.csproj", "{07FA8278-7AB7-4D4A-BC42-94FE422688F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalBlog.Api", "PersonalBlog.Api\PersonalBlog.Api.csproj", "{07FA8278-7AB7-4D4A-BC42-94FE422688F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalBlog.Business", "PersonalBlog.Business\PersonalBlog.Business.csproj", "{273A40D0-BD19-45E8-9B43-1FEC6374FBF1}"
 EndProject

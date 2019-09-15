@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace PersonalBlog.Web
+namespace PersonalBlog.Api
 {
     public class Program
     {
