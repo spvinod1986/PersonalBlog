@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -15,6 +14,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PersonalBlog.Business\PersonalBlog.Business.csproj" />
+    <ProjectReference Include="..\PersonalBlog.Persistence\PersonalBlog.Persistence.csproj" />
+    <ProjectReference Include="..\PersonalBlog.Domain\PersonalBlog.Domain.csproj" />
   </ItemGroup>
 
 </Project>
