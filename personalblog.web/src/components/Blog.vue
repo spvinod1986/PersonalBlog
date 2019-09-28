@@ -1,20 +1,17 @@
 <template>
   <div>
-    <p>{{ msg }}</p>
+    <h1>{{ title }}</h1>
+    <p v-html="content"></p>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "Blog",
-  data() {
-    return {
-      msg: "Hello!! I am Vinod. This is my blog!!!"
-    };
-  },
-  methods: {}
+  props: {
+    title: String,
+    content: String // or any other constructor
+  }
 };
 </script>
 
