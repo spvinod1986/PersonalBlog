@@ -2,14 +2,15 @@
   <div class="edit">
     <form @submit="putBlog">
       <textarea class="form-control" v-model="title"></textarea>
-      <textarea class="form-control" v-model="content"></textarea>
-
+      <!-- <textarea class="form-control" v-model="content"></textarea> -->
+      <ckeditor :editor="editor" v-model="content" :config="editorConfig"></ckeditor>
       <button class="btn btn-success">Submit</button>
     </form>
   </div>
 </template>
 
 <script>
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
 
 export default {
@@ -17,7 +18,11 @@ export default {
   data() {
     return {
       title: "",
-      content: ""
+      content: "",
+      editor: ClassicEditor,
+      editorConfig: {
+        // The configuration of the editor.
+      }
     };
   },
   methods: {
