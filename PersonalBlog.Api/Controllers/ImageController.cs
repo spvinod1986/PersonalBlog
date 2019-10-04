@@ -18,21 +18,24 @@ namespace PersonalBlog.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Post(IFormFile file)
+        public async Task<JsonResult> Post(IFormFile upload)
         {
+            if (upload == null)
+                throw new ArgumentException("Image to upload should not be null or empty");
+
             var uploads = Path.Combine(_environment.WebRootPath, "uploads");
             Directory.CreateDirectory(uploads);
 
-            if (file.Length > 0)
+            if (upload.Length > 0)
             {
-                using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
+                using (var fileStream = new FileStream(Path.Combine(uploads, upload.FileName), FileMode.Create))
                 {
-                    await file.CopyToAsync(fileStream);
+                    await upload.CopyToAsync(fileStream);
                 }
             }
             return new JsonResult(new ImageResult
             {
-                Url = $"https://localhost:5001/uploads/{file.FileName}"
+                Url = $"https://localhost:5001/uploads/{upload.FileName}"
             });
         }
     }
