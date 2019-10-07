@@ -1,10 +1,8 @@
 <template>
   <div class="create">
-    <form @submit="postBlog">
-      <textarea class="form-control" v-model="title" placeholder="Enter Title"></textarea>
-      <editor @onUpdate="onEditorContentUpdate"></editor>
-      <button class="btn btn-success">Submit</button>
-    </form>
+    <textarea class="form-control" v-model="title" placeholder="Enter Title"></textarea>
+    <editor @onUpdate="onEditorContentUpdate"></editor>
+    <button class="btn btn-success" v-on:click="postBlog">Submit</button>
   </div>
 </template>
 
