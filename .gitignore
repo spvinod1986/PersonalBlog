@@ -331,3 +331,6 @@ ASALocalRun/
 
 # VsCode Settings
 .vscode/
+
+# Temporary setup
+uploads/

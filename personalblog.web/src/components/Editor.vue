@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ImageUploadModal ref="ytmodal" @onConfirm="addCommand" />
     <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
       <div class="menubar">
         <button
@@ -115,6 +116,10 @@
           <font-awesome-icon icon="ruler-horizontal" />
         </button>
 
+        <button class="menubar__button" @click="openModal(commands.image);">
+          <font-awesome-icon icon="image" />
+        </button>
+
         <button class="menubar__button" @click="commands.undo">
           <font-awesome-icon icon="undo" />
         </button>
@@ -187,8 +192,10 @@ import {
   Link,
   Strike,
   Underline,
-  History
+  History,
+  Image
 } from "tiptap-extensions";
+import ImageUploadModal from "./ImageUpload";
 
 export default {
   name: "editor",
@@ -201,7 +208,8 @@ export default {
   components: {
     EditorMenuBar,
     EditorContent,
-    EditorMenuBubble
+    EditorMenuBubble,
+    ImageUploadModal
   },
   data() {
     return {
@@ -225,7 +233,8 @@ export default {
           new Link(),
           new Strike(),
           new Underline(),
-          new History()
+          new History(),
+          new Image()
         ],
         content: "",
         onUpdate: ({ getHTML }) => {
@@ -260,6 +269,14 @@ export default {
     setLinkUrl(command, url) {
       command({ href: url });
       this.hideLinkMenu();
+    },
+    addCommand(data) {
+      if (data.command !== null) {
+        data.command(data.data);
+      }
+    },
+    openModal(command) {
+      this.$refs.ytmodal.showModal(command);
     }
   }
 };
