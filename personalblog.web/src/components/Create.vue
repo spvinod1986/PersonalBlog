@@ -1,6 +1,9 @@
 <template>
   <div class="create">
-    <textarea class="form-control" v-model="title" placeholder="Enter Title"></textarea>
+    <span>
+      <time datetime="2019-09-30">30 SEP 2019</time>
+    </span>
+    <textarea class="form-control title" v-model="title" placeholder="Enter Title here"></textarea>
     <editor @onUpdate="onEditorContentUpdate"></editor>
     <button class="btn btn-success" v-on:click="postBlog">Submit</button>
   </div>
@@ -46,4 +49,10 @@ export default {
 </script>
 
 <style scoped>
+.title {
+  border: hidden;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #222222;
+}
 </style>

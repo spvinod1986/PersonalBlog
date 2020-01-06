@@ -1,7 +1,10 @@
 <template>
   <div class="edit">
     <form @submit="putBlog">
-      <textarea class="form-control" v-model="title"></textarea>
+      <span>
+        <time datetime="2019-09-30">30 SEP 2019</time>
+      </span>
+      <textarea class="form-control title" v-model="title"></textarea>
       <editor v-bind:content="content" @onUpdate="onEditorContentUpdate" :key="id"></editor>
       <button class="btn btn-success">Submit</button>
     </form>
@@ -67,4 +70,10 @@ export default {
 </script>
 
 <style scoped>
+.title {
+  border: hidden;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #222222;
+}
 </style>

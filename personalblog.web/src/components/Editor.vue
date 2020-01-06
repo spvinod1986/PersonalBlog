@@ -404,14 +404,14 @@ li[data-done="false"] {
   font-size: 0.8rem;
   overflow-x: auto;
 }
-.editor__content p code {
+.editor__content pre code {
   display: inline-block;
   padding: 0 0.4rem;
   border-radius: 5px;
   font-size: 0.8rem;
   font-weight: 400;
   background: rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.8);
+  overflow-x: auto;
 }
 :focus {
   outline: none;
