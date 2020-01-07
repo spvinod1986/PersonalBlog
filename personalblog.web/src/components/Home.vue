@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div v-for="(blog,index) in blogs" :key="blog.id + '_' + index">
+    <div v-for="(blog,index) in pageOfBlogs" :key="blog.id + '_' + index">
       <article class="blog-article">
         <header class="blog-header">
           <span class="blog-meta">
@@ -15,17 +15,35 @@
         </section>
       </article>
     </div>
+    <div class="blog-page">
+      <jw-pagination
+        :items="blogs"
+        @changePage="onChangePage"
+        :labels="customLabels"
+        :maxPages="5"
+        :pageSize="5"
+      ></jw-pagination>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 
+const customLabels = {
+  first: "<<",
+  last: ">>",
+  previous: "<",
+  next: ">"
+};
+
 export default {
   name: "home",
   data() {
     return {
-      blogs: []
+      blogs: [],
+      pageOfBlogs: [],
+      customLabels
     };
   },
   methods: {
@@ -40,6 +58,9 @@ export default {
           // eslint-disable-next-line
           console.error(error);
         });
+    },
+    onChangePage(pageOfBlogs) {
+      this.pageOfBlogs = pageOfBlogs;
     }
   },
   created() {
@@ -69,5 +90,10 @@ export default {
   font-size: 1.685rem;
   font-weight: 600;
   color: #222222;
+}
+
+.blog-page {
+  background-color: white;
+  text-align: center;
 }
 </style>
