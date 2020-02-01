@@ -29,6 +29,16 @@ namespace PersonalBlog.Api
             services.AddSingleton<BlogContext>();
             services.AddTransient<IBlogLogic, BlogLogic>();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("WebAppPolicy", builder =>
+                {
+                    builder.WithOrigins("http://localhost:8080")
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                });
+            });
+
             services
                 .AddControllers();
         }
@@ -42,8 +52,10 @@ namespace PersonalBlog.Api
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCors("WebAppPolicy");
 
             app.UseAuthorization();
 
