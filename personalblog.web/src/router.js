@@ -31,7 +31,7 @@ export default new Router({
       beforeEnter: authGuard
     },
     {
-      path: '/list',
+      path: '/admin',
       name: 'list',
       component: List,
       beforeEnter: authGuard
