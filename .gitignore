@@ -335,5 +335,6 @@ ASALocalRun/
 # Temporary setup
 uploads/
 
-# Auth Setting
+# Auth & Dev Setting
 auth_config.json
+appsettings.Development.json

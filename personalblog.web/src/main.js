@@ -8,13 +8,21 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBold, faItalic, faStrikethrough, faUnderline, faCode, faParagraph, faHeading, faList, faListOl, faQuoteRight, faFileCode, faRulerHorizontal, faUndo, faRedo, faTasks, faLink, faWindowClose, faImage } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import JwPagination from 'jw-vue-pagination';
-import { domain, clientId } from "../auth_config.json"; // Auth0 Configuration - Remember this is not checked in source control 
+// Auth0 Configuration - Remember auth_config.json is not checked in source control 
+// It has following details
+// {
+//   "domain": "",
+//   "clientId": "",
+//   "audience": ""
+// }
+import { domain, clientId, audience } from "../auth_config.json";
 import { Auth0Plugin } from "./auth"; // Auth0 plugin
 
 // Install the authentication plugin
 Vue.use(Auth0Plugin, {
   domain,
   clientId,
+  audience,
   onRedirectCallback: appState => {
     router.push(
       appState && appState.targetUrl

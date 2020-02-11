@@ -25,14 +25,23 @@ export default {
     };
   },
   methods: {
-    postBlog(e) {
+    async postBlog(e) {
       e.preventDefault();
-      const path = "https://localhost:5001/api/blogs";
+      const path = process.env.VUE_APP_API_PATH + "blogs";
+      const token = await this.$auth.getTokenSilently();
       axios
-        .post(path, {
-          title: this.title,
-          content: this.content
-        })
+        .post(
+          path,
+          {
+            title: this.title,
+            content: this.content
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        )
         .then(res => {
           this.blog = res.data;
         })

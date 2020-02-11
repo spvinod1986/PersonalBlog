@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PersonalBlog.Business.Blogs;
 using PersonalBlog.Domain.Models;
@@ -32,6 +33,7 @@ namespace PersonalBlog.Api.Controllers
 
         // POST api/blogs
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Blog>> Post([FromBody] Blog blog)
         {
             return Ok(await _blogLogic.CreateAsync(blog));
@@ -39,6 +41,7 @@ namespace PersonalBlog.Api.Controllers
 
         // PUT api/blogs/5
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> Put(string id, [FromBody] Blog blog)
         {
             await _blogLogic.UpdateAsync(id, blog);
@@ -47,10 +50,10 @@ namespace PersonalBlog.Api.Controllers
 
         // DELETE api/blogs/5
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task Delete(string id)
         {
             await _blogLogic.DeleteAsync(id);
         }
-
     }
 }

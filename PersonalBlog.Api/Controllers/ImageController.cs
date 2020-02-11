@@ -1,9 +1,12 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using PersonalBlog.Api.Options;
 
 namespace PersonalBlog.Api.Controllers
 {
@@ -12,12 +15,15 @@ namespace PersonalBlog.Api.Controllers
     public class ImageController : ControllerBase
     {
         private readonly IWebHostEnvironment _environment;
-        public ImageController(IWebHostEnvironment environment)
+        private readonly ImageUploadOptions _options;
+        public ImageController(IWebHostEnvironment environment, IOptions<ImageUploadOptions> options)
         {
             _environment = environment ?? throw new ArgumentNullException(nameof(environment));
+            _options = options.Value;
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<JsonResult> Post(IFormFile upload)
         {
             if (upload == null)
@@ -35,7 +41,7 @@ namespace PersonalBlog.Api.Controllers
             }
             return new JsonResult(new ImageResult
             {
-                Url = $"https://localhost:5001/uploads/{upload.FileName}"
+                Url = $"{_options.Url}{upload.FileName}"
             });
         }
     }

@@ -26,7 +26,8 @@ export default {
   },
   methods: {
     getBlog() {
-      const path = "https://localhost:5001/api/blogs/" + this.$route.params.id;
+      const path =
+        process.env.VUE_APP_API_PATH + "blogs/" + this.$route.params.id;
       axios
         .get(path)
         .then(res => {
