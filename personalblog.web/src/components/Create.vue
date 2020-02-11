@@ -5,13 +5,14 @@
     </span>
     <textarea class="form-control title" v-model="title" placeholder="Enter Title here"></textarea>
     <editor @onUpdate="onEditorContentUpdate"></editor>
-    <button class="btn btn-success" v-on:click="postBlog">Submit</button>
+    <button class="btn btn-success" v-on:click="postBlog">Save</button>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import editor from "./Editor";
+import router from "../router";
 
 export default {
   name: "create",
@@ -25,16 +26,25 @@ export default {
     };
   },
   methods: {
-    postBlog(e) {
+    async postBlog(e) {
       e.preventDefault();
-      const path = "https://localhost:5001/api/blogs";
+      const path = process.env.VUE_APP_API_PATH + "blogs";
+      const token = await this.$auth.getTokenSilently();
       axios
-        .post(path, {
-          title: this.title,
-          content: this.content
-        })
+        .post(
+          path,
+          {
+            title: this.title,
+            content: this.content
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        )
         .then(res => {
-          this.blog = res.data;
+          router.push({ name: "edit", params: { id: res.data.id } });
         })
         .catch(error => {
           // eslint-disable-next-line

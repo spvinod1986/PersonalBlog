@@ -74,15 +74,17 @@ export default {
       this.command = command;
       this.show = true;
     },
-    vfileUploaded(file) {
+    async vfileUploaded(file) {
       /** Here is where you get your URL/Base64 string or what ever.*/
-      const uploadUrl = "https://localhost:5001/api/image";
+      const uploadUrl = process.env.VUE_APP_API_PATH + "image";
+      const token = await this.$auth.getTokenSilently();
       let formData = new FormData();
       formData.append("upload", file);
       axios
         .post(uploadUrl, formData, {
           headers: {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`
           }
         })
         .then(data => {
@@ -90,15 +92,17 @@ export default {
         });
     },
 
-    fileChange(e) {
+    async fileChange(e) {
       const file = this.$refs.file.files[0];
-      const uploadUrl = "https://localhost:5001/api/image";
+      const uploadUrl = process.env.VUE_APP_API_PATH + "image";
+      const token = await this.$auth.getTokenSilently();
       let formData = new FormData();
       formData.append("upload", this.$refs.file.files[0]);
       axios
         .post(uploadUrl, formData, {
           headers: {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`
           }
         })
         .then(data => {

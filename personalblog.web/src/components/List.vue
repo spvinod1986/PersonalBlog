@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     getBlogs() {
-      const path = "https://localhost:5001/api/blogs";
+      const path = process.env.VUE_APP_API_PATH + "blogs";
       axios
         .get(path)
         .then(res => {
@@ -65,10 +65,15 @@ export default {
           console.error(error);
         });
     },
-    deleteBlog(id, event) {
-      const path = "https://localhost:5001/api/blogs/" + id;
+    async deleteBlog(id, event) {
+      const path = process.env.VUE_APP_API_PATH + "blogs/" + id;
+      const token = await this.$auth.getTokenSilently();
       axios
-        .delete(path)
+        .delete(path, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
         .then(res => {})
         .catch(error => {
           // eslint-disable-next-line

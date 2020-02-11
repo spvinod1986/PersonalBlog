@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import { authGuard } from "./auth/authGuard";
 import Home from './components/Home.vue';
 import Blog from './components/Blog.vue';
 import Create from './components/Create.vue';
 import List from './components/List.vue';
 import Edit from './components/Edit.vue';
+
 
 Vue.use(Router);
 
@@ -25,17 +27,20 @@ export default new Router({
     {
       path: '/create',
       name: 'create',
-      component: Create
+      component: Create,
+      beforeEnter: authGuard
     },
     {
-      path: '/list',
+      path: '/admin',
       name: 'list',
-      component: List
+      component: List,
+      beforeEnter: authGuard
     },
     {
       path: '/edit/:id',
       name: 'edit',
-      component: Edit
+      component: Edit,
+      beforeEnter: authGuard
     }
   ],
 });

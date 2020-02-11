@@ -6,7 +6,7 @@
       </span>
       <textarea class="form-control title" v-model="title"></textarea>
       <editor v-bind:content="content" @onUpdate="onEditorContentUpdate" :key="id"></editor>
-      <button class="btn btn-success">Submit</button>
+      <button class="btn btn-success">Save</button>
     </form>
   </div>
 </template>
@@ -29,7 +29,8 @@ export default {
   },
   methods: {
     getBlog() {
-      const path = "https://localhost:5001/api/blogs/" + this.$route.params.id;
+      const path =
+        process.env.VUE_APP_API_PATH + "blogs/" + this.$route.params.id;
       axios
         .get(path)
         .then(res => {
@@ -42,15 +43,25 @@ export default {
           console.error(error);
         });
     },
-    putBlog(e) {
+    async putBlog(e) {
       e.preventDefault();
-      const path = "https://localhost:5001/api/blogs/" + this.$route.params.id;
+      const path =
+        process.env.VUE_APP_API_PATH + "blogs/" + this.$route.params.id;
+      const token = await this.$auth.getTokenSilently();
       axios
-        .put(path, {
-          id: this.$route.params.id,
-          title: this.title,
-          content: this.content
-        })
+        .put(
+          path,
+          {
+            id: this.$route.params.id,
+            title: this.title,
+            content: this.content
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        )
         .then(res => {
           this.blog = res.data;
         })

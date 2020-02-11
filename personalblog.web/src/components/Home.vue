@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     getBlogs() {
-      const path = "https://localhost:5001/api/blogs";
+      const path = process.env.VUE_APP_API_PATH + "blogs";
       axios
         .get(path)
         .then(res => {
