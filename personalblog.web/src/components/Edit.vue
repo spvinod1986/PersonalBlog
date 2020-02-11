@@ -6,7 +6,7 @@
       </span>
       <textarea class="form-control title" v-model="title"></textarea>
       <editor v-bind:content="content" @onUpdate="onEditorContentUpdate" :key="id"></editor>
-      <button class="btn btn-success">Submit</button>
+      <button class="btn btn-success">Save</button>
     </form>
   </div>
 </template>
