@@ -63,22 +63,44 @@ export default {
         .catch(error => {
           // eslint-disable-next-line
           console.error(error);
+          this.$alert(
+            "Something went wrong. Try again later!",
+            "Error",
+            "error"
+          );
         });
     },
     async deleteBlog(id, event) {
       const path = process.env.VUE_APP_API_PATH + "blogs/" + id;
       const token = await this.$auth.getTokenSilently();
-      axios
-        .delete(path, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
+
+      this.$confirm(
+        "Are you sure you want to delete this article.",
+        "Question",
+        "question"
+      )
+        .then(() => {
+          axios
+            .delete(path, {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            })
+            .then(res => {
+              this.$alert("Article Deleted", "Success", "success");
+              this.getBlogs();
+            })
+            .catch(error => {
+              // eslint-disable-next-line
+              console.error(error);
+              this.$alert(
+                "Something went wrong. Try again later!",
+                "Error",
+                "error"
+              );
+            });
         })
-        .then(res => {})
-        .catch(error => {
-          // eslint-disable-next-line
-          console.error(error);
-        });
+        .catch(() => {});
     },
     onChangePage(pageOfBlogs) {
       this.pageOfBlogs = pageOfBlogs;

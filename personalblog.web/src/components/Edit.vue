@@ -46,6 +46,11 @@ export default {
         .catch(error => {
           // eslint-disable-next-line
           console.error(error);
+          this.$alert(
+            "Something went wrong. Try again later!",
+            "Error",
+            "error"
+          );
         });
     },
     async putBlog(e) {
@@ -71,11 +76,17 @@ export default {
           }
         )
         .then(res => {
+          this.$alert("Article Saved", "Success", "success");
           this.blog = res.data;
         })
         .catch(error => {
           // eslint-disable-next-line
           console.error(error);
+          this.$alert(
+            "Something went wrong. Try again later!",
+            "Error",
+            "error"
+          );
         });
     },
     onEditorContentUpdate(editorContent) {

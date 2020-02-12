@@ -45,11 +45,17 @@ export default {
           }
         )
         .then(res => {
+          this.$alert("Article Saved", "Success", "success");
           router.push({ name: "edit", params: { id: res.data.id } });
         })
         .catch(error => {
           // eslint-disable-next-line
           console.error(error);
+          this.$alert(
+            "Something went wrong. Try again later!",
+            "Error",
+            "error"
+          );
         });
     },
     onEditorContentUpdate(editorContent) {
@@ -61,13 +67,11 @@ export default {
 
 <style scoped>
 .title {
-  border: hidden;
   font-size: 2rem;
   font-weight: 600;
   color: #222222;
 }
 .tags {
-  border: hidden;
   margin-top: 1%;
   color: coral;
   font-weight: 400;

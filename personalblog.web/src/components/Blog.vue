@@ -39,6 +39,11 @@ export default {
         .catch(error => {
           // eslint-disable-next-line
           console.error(error);
+          this.$alert(
+            "Something went wrong. Try again later!",
+            "Error",
+            "error"
+          );
         });
     }
   },
