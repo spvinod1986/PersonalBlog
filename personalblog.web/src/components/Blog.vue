@@ -3,8 +3,9 @@
     <article class="blog-article">
       <header class="blog-header">
         <span class="blog-meta">
-          <time datetime="2019-09-30">30 SEP 2019</time>
-        </span>
+          <time>{{ blog.updatedAt | moment("DD MMM YYYY") }}</time>
+        </span>&nbsp;
+        <span class="blog-tags">{{ blog.tags }}</span>
         <h2 class="blog-title">{{ blog.title }}</h2>
       </header>
       <section class="blog-excerpt">
@@ -27,7 +28,9 @@ export default {
   methods: {
     getBlog() {
       const path =
-        process.env.VUE_APP_API_PATH + "blogs/" + this.$route.params.id;
+        process.env.VUE_APP_API_PATH +
+        "blogs/GetByTitleUrl/" +
+        this.$route.params.titleurl;
       axios
         .get(path)
         .then(res => {
@@ -60,6 +63,13 @@ export default {
   font-weight: 500;
   text-transform: uppercase;
   color: #575b5e;
+}
+
+.blog-tags {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: coral;
 }
 
 .blog-title {

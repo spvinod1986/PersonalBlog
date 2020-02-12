@@ -1,9 +1,7 @@
 <template>
   <div class="create">
-    <span>
-      <time datetime="2019-09-30">30 SEP 2019</time>
-    </span>
     <textarea class="form-control title" v-model="title" placeholder="Enter Title here"></textarea>
+    <textarea class="form-control tags" v-model="tags" placeholder="Enter Tags here"></textarea>
     <editor @onUpdate="onEditorContentUpdate"></editor>
     <button class="btn btn-success" v-on:click="postBlog">Save</button>
   </div>
@@ -22,7 +20,8 @@ export default {
   data() {
     return {
       title: "",
-      content: ""
+      content: "",
+      tags: ""
     };
   },
   methods: {
@@ -35,7 +34,9 @@ export default {
           path,
           {
             title: this.title,
-            content: this.content
+            content: this.content,
+            tags: this.tags,
+            createdBy: this.$auth.user.name
           },
           {
             headers: {
@@ -64,5 +65,11 @@ export default {
   font-size: 2rem;
   font-weight: 600;
   color: #222222;
+}
+.tags {
+  border: hidden;
+  margin-top: 1%;
+  color: coral;
+  font-weight: 400;
 }
 </style>

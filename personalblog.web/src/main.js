@@ -17,6 +17,7 @@ import JwPagination from 'jw-vue-pagination';
 // }
 import { domain, clientId, audience } from "../auth_config.json";
 import { Auth0Plugin } from "./auth"; // Auth0 plugin
+import VueMoment from 'vue-moment'
 
 // Install the authentication plugin
 Vue.use(Auth0Plugin, {
@@ -33,6 +34,7 @@ Vue.use(Auth0Plugin, {
 });
 
 Vue.use(NavbarPlugin);
+Vue.use(VueMoment);
 library.add(faBold, faItalic, faStrikethrough, faUnderline, faCode, faParagraph, faHeading, faList, faListOl, faQuoteRight, faFileCode, faRulerHorizontal, faUndo, faRedo, faTasks, faLink, faWindowClose, faImage);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('jw-pagination', JwPagination);

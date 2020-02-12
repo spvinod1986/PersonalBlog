@@ -338,3 +338,4 @@ uploads/
 # Auth & Dev Setting
 auth_config.json
 appsettings.Development.json
+.DS_Store

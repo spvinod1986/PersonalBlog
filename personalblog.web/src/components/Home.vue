@@ -4,9 +4,10 @@
       <article class="blog-article">
         <header class="blog-header">
           <span class="blog-meta">
-            <time datetime="2019-09-30">30 SEP 2019</time>
-          </span>
-          <router-link :to="'/blog/' + blog.id">
+            <time>{{ blog.updatedAt | moment("DD MMM YYYY") }}</time>
+          </span>&nbsp;
+          <span class="blog-tags">{{ blog.tags }}</span>
+          <router-link :to="'/blog/' + blog.titleUrl">
             <h2 class="blog-title">{{ blog.title }}</h2>
           </router-link>
         </header>
@@ -84,6 +85,13 @@ export default {
   font-weight: 500;
   text-transform: uppercase;
   color: #575b5e;
+}
+
+.blog-tags {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: coral;
 }
 
 .blog-title {

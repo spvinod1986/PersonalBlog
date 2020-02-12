@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     getBlogs() {
-      const path = process.env.VUE_APP_API_PATH + "blogs";
+      const path = process.env.VUE_APP_API_PATH + "blogs/getall";
       axios
         .get(path)
         .then(res => {

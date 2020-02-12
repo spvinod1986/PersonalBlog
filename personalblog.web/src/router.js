@@ -20,7 +20,7 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/blog/:id',
+      path: '/blog/:titleurl',
       name: 'blog',
       component: Blog
     },

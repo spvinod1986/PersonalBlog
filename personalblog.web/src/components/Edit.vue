@@ -1,11 +1,12 @@
 <template>
   <div class="edit">
     <form @submit="putBlog">
-      <span>
-        <time datetime="2019-09-30">30 SEP 2019</time>
-      </span>
-      <textarea class="form-control title" v-model="title"></textarea>
+      <textarea class="form-control title" v-model="title" placeholder="Enter Title here"></textarea>
+      <textarea class="form-control tags" v-model="tags" placeholder="Enter Tags here"></textarea>
       <editor v-bind:content="content" @onUpdate="onEditorContentUpdate" :key="id"></editor>
+      <input type="checkbox" id="ispublished" v-model="isPublished" />
+      <label for="ispublished">Review and Publish?</label>
+      <br />
       <button class="btn btn-success">Save</button>
     </form>
   </div>
@@ -24,7 +25,9 @@ export default {
     return {
       id: "",
       title: "",
-      content: ""
+      content: "",
+      tags: "",
+      isPublished: Boolean
     };
   },
   methods: {
@@ -37,6 +40,8 @@ export default {
           this.id = res.data.id;
           this.title = res.data.title;
           this.content = res.data.content;
+          this.tags = res.data.tags;
+          this.isPublished = res.data.isPublished;
         })
         .catch(error => {
           // eslint-disable-next-line
@@ -54,7 +59,10 @@ export default {
           {
             id: this.$route.params.id,
             title: this.title,
-            content: this.content
+            content: this.content,
+            tags: this.tags,
+            updatedBy: this.$auth.user.name,
+            isPublished: this.isPublished
           },
           {
             headers: {
@@ -86,5 +94,11 @@ export default {
   font-size: 2rem;
   font-weight: 600;
   color: #222222;
+}
+.tags {
+  border: hidden;
+  margin-top: 1%;
+  color: coral;
+  font-weight: 400;
 }
 </style>
