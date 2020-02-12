@@ -12,8 +12,11 @@
           </router-link>
         </header>
         <section class="blog-excerpt">
-          <p>{{ blog.content.substring(0,300) + "..." }}</p>
+          <p v-html="getTrimmedBlogContent(blog.content)"></p>
         </section>
+        <router-link :to="'/blog/' + blog.titleUrl">
+          <h6 class="blog-link">Read</h6>
+        </router-link>
       </article>
     </div>
     <div class="blog-page">
@@ -60,6 +63,9 @@ export default {
           console.error(error);
         });
     },
+    getTrimmedBlogContent(content) {
+      return content.substring(0, 300) + "...";
+    },
     onChangePage(pageOfBlogs) {
       this.pageOfBlogs = pageOfBlogs;
     }
@@ -103,5 +109,9 @@ export default {
 .blog-page {
   background-color: white;
   text-align: center;
+}
+
+.blog-link {
+  color: #5e4dbf;
 }
 </style>
