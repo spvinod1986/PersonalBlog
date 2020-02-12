@@ -101,13 +101,11 @@ export default {
 
 <style scoped>
 .title {
-  border: hidden;
   font-size: 2rem;
   font-weight: 600;
   color: #222222;
 }
 .tags {
-  border: hidden;
   margin-top: 1%;
   color: coral;
   font-weight: 400;

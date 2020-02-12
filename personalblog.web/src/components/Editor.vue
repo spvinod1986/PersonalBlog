@@ -193,7 +193,8 @@ import {
   Strike,
   Underline,
   History,
-  Image
+  Image,
+  Placeholder
 } from "tiptap-extensions";
 import ImageUploadModal from "./ImageUpload";
 
@@ -214,6 +215,7 @@ export default {
   data() {
     return {
       editor: new Editor({
+        autoFocus: true,
         extensions: [
           new Blockquote(),
           new CodeBlock(),
@@ -234,7 +236,13 @@ export default {
           new Strike(),
           new Underline(),
           new History(),
-          new Image()
+          new Image(),
+          new Placeholder({
+            showOnlyCurrent: false,
+            emptyNodeText: node => {
+              return "Write something";
+            }
+          })
         ],
         content: "",
         onUpdate: ({ getHTML }) => {
@@ -415,5 +423,20 @@ li[data-done="false"] {
 }
 :focus {
   outline: none;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.editor *.is-empty:nth-child(1)::before,
+.editor *.is-empty:nth-child(2)::before {
+  content: attr(data-empty-text);
+  float: left;
+  color: #aaa;
+  pointer-events: none;
+  height: 0;
+  font-style: italic;
 }
 </style>
