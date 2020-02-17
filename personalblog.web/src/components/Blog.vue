@@ -9,7 +9,7 @@
         <h2 class="blog-title">{{ blog.title }}</h2>
       </header>
       <section class="blog-excerpt">
-        <p v-html="blog.content"></p>
+        <p class="blog-content" v-html="blog.content"></p>
       </section>
     </article>
   </div>
@@ -17,6 +17,7 @@
 
 <script>
 import axios from "axios";
+import hljs from "highlight.js";
 
 export default {
   name: "blog",
@@ -34,6 +35,12 @@ export default {
       axios
         .get(path)
         .then(res => {
+          var el = document.createElement("html");
+          el.innerHTML = res.data.content;
+          el.querySelectorAll("pre code").forEach(block => {
+            hljs.highlightBlock(block);
+          });
+          res.data.content = el.getElementsByTagName("body")[0].innerHTML;
           this.blog = res.data;
         })
         .catch(error => {
@@ -53,7 +60,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .blog-article {
   position: relative;
   margin: 1rem auto;
@@ -81,5 +88,23 @@ export default {
   font-size: 2rem;
   font-weight: 600;
   color: #222222;
+}
+
+.blog-content pre {
+  padding: 0.7rem 1rem !important;
+  border-radius: 5px !important;
+  background: #000 !important;
+  color: #fff !important;
+  font-size: 0.8rem !important;
+  overflow-x: scroll !important;
+}
+.blog-content pre code {
+  display: inline-block !important;
+  padding: 0 0.4rem !important;
+  border-radius: 5px !important;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  background: rgba(0, 0, 0, 0.1) !important;
+  overflow-x: scroll !important;
 }
 </style>
