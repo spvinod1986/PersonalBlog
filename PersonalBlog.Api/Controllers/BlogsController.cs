@@ -24,11 +24,25 @@ namespace PersonalBlog.Api.Controllers
             return Ok(await _blogLogic.GetAsync());
         }
 
+        // GET api/blogs/GetAll
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<IEnumerable<Blog>>> GetAll()
+        {
+            return Ok(await _blogLogic.GetAllAsync());
+        }
+
         // GET api/blogs/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Blog>> Get(string id)
         {
             return Ok(await _blogLogic.GetAsync(id));
+        }
+
+        // GET api/blogs/GetByTitleUrl/asp-net-5
+        [HttpGet("GetByTitleUrl/{titleUrl}")]
+        public async Task<ActionResult<Blog>> GetByTitleUrl(string titleUrl)
+        {
+            return Ok(await _blogLogic.GetByTitleUrlAsync(titleUrl));
         }
 
         // POST api/blogs

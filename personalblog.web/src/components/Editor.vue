@@ -176,6 +176,7 @@
 <script>
 import { Editor, EditorContent, EditorMenuBar, EditorMenuBubble } from "tiptap";
 import {
+  CodeBlockHighlight,
   Blockquote,
   CodeBlock,
   HardBreak,
@@ -193,8 +194,26 @@ import {
   Strike,
   Underline,
   History,
-  Image
+  Image,
+  Placeholder
 } from "tiptap-extensions";
+
+import hljs from "highlight.js/lib/highlight";
+import bash from "highlight.js/lib/languages/bash";
+import cs from "highlight.js/lib/languages/cs";
+import css from "highlight.js/lib/languages/css";
+import docker from "highlight.js/lib/languages/dockerfile";
+import java from "highlight.js/lib/languages/java";
+import javascript from "highlight.js/lib/languages/javascript";
+import json from "highlight.js/lib/languages/json";
+import powershell from "highlight.js/lib/languages/powershell";
+import python from "highlight.js/lib/languages/python";
+import scss from "highlight.js/lib/languages/scss";
+import sql from "highlight.js/lib/languages/sql";
+import swift from "highlight.js/lib/languages/swift";
+import typescript from "highlight.js/lib/languages/typescript";
+import xml from "highlight.js/lib/languages/xml";
+
 import ImageUploadModal from "./ImageUpload";
 
 export default {
@@ -215,6 +234,24 @@ export default {
     return {
       editor: new Editor({
         extensions: [
+          new CodeBlockHighlight({
+            languages: {
+              bash,
+              cs,
+              css,
+              docker,
+              java,
+              javascript,
+              json,
+              powershell,
+              python,
+              scss,
+              sql,
+              swift,
+              typescript,
+              xml
+            }
+          }),
           new Blockquote(),
           new CodeBlock(),
           new HardBreak(),
@@ -234,7 +271,14 @@ export default {
           new Strike(),
           new Underline(),
           new History(),
-          new Image()
+          new Image(),
+          new Placeholder({
+            emptyEditorClass: "is-editor-empty",
+            emptyNodeClass: "is-empty",
+            emptyNodeText: "Write something …",
+            showOnlyWhenEditable: true,
+            showOnlyCurrent: true
+          })
         ],
         content: "",
         onUpdate: ({ getHTML }) => {
@@ -396,6 +440,15 @@ li[data-done="false"] {
 .editor__content li > ul {
   margin: 0;
 }
+
+:focus {
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
 .editor__content pre {
   padding: 0.7rem 1rem;
   border-radius: 5px;
@@ -413,7 +466,65 @@ li[data-done="false"] {
   background: rgba(0, 0, 0, 0.1);
   overflow-x: auto;
 }
-:focus {
-  outline: none;
+pre::before {
+  content: attr(data-language);
+  text-transform: uppercase;
+  display: block;
+  text-align: right;
+  font-weight: bold;
+  font-size: 0.6rem;
+}
+pre code .hljs-comment,
+pre code .hljs-quote {
+  color: #999;
+}
+pre code .hljs-variable,
+pre code .hljs-template-variable,
+pre code .hljs-attribute,
+pre code .hljs-tag,
+pre code .hljs-name,
+pre code .hljs-regexp,
+pre code .hljs-link,
+pre code .hljs-name,
+pre code .hljs-selector-id,
+pre code .hljs-selector-class {
+  color: #f2777a;
+}
+pre code .hljs-number,
+pre code .hljs-meta,
+pre code .hljs-built_in,
+pre code .hljs-builtin-name,
+pre code .hljs-literal,
+pre code .hljs-type,
+pre code .hljs-params {
+  color: #f99157;
+}
+pre code .hljs-string,
+pre code .hljs-symbol,
+pre code .hljs-bullet {
+  color: #9c9;
+}
+pre code .hljs-title,
+pre code .hljs-section {
+  color: #fc6;
+}
+pre code .hljs-keyword,
+pre code .hljs-selector-tag {
+  color: #69c;
+}
+pre code .hljs-emphasis {
+  font-style: italic;
+}
+pre code .hljs-strong {
+  font-weight: 700;
+}
+
+.editor p.is-editor-empty:first-child::before {
+  content: attr(data-empty-text);
+  float: left;
+  color: #aaa;
+  pointer-events: none;
+  height: 0;
+  font-style: italic;
 }
 </style>

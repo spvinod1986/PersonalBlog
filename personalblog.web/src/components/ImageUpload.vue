@@ -89,6 +89,15 @@ export default {
         })
         .then(data => {
           this.imageSrc = data.data.url;
+        })
+        .catch(error => {
+          // eslint-disable-next-line
+          console.error(error);
+          this.$alert(
+            "Something went wrong. Try again later!",
+            "Error",
+            "error"
+          );
         });
     },
 
@@ -107,6 +116,15 @@ export default {
         })
         .then(data => {
           this.imageSrc = data.data.url;
+        })
+        .catch(error => {
+          // eslint-disable-next-line
+          console.error(error);
+          this.$alert(
+            "Something went wrong. Try again later!",
+            "Error",
+            "error"
+          );
         });
     },
     insertImage() {

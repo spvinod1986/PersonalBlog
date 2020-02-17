@@ -4,15 +4,19 @@
       <article class="blog-article">
         <header class="blog-header">
           <span class="blog-meta">
-            <time datetime="2019-09-30">30 SEP 2019</time>
-          </span>
-          <router-link :to="'/blog/' + blog.id">
+            <time>{{ blog.updatedAt | moment("DD MMM YYYY") }}</time>
+          </span>&nbsp;
+          <span class="blog-tags">{{ blog.tags }}</span>
+          <router-link :to="'/blog/' + blog.titleUrl">
             <h2 class="blog-title">{{ blog.title }}</h2>
           </router-link>
         </header>
         <section class="blog-excerpt">
-          <p>{{ blog.content.substring(0,300) + "..." }}</p>
+          <p v-html="getTrimmedBlogContent(blog.content)"></p>
         </section>
+        <router-link :to="'/blog/' + blog.titleUrl">
+          <h6 class="blog-link">Read</h6>
+        </router-link>
       </article>
     </div>
     <div class="blog-page">
@@ -57,7 +61,15 @@ export default {
         .catch(error => {
           // eslint-disable-next-line
           console.error(error);
+          this.$alert(
+            "Something went wrong. Try again later!",
+            "Error",
+            "error"
+          );
         });
+    },
+    getTrimmedBlogContent(content) {
+      return content.substring(0, 300) + "...";
     },
     onChangePage(pageOfBlogs) {
       this.pageOfBlogs = pageOfBlogs;
@@ -86,6 +98,13 @@ export default {
   color: #575b5e;
 }
 
+.blog-tags {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: coral;
+}
+
 .blog-title {
   font-size: 1.685rem;
   font-weight: 600;
@@ -95,5 +114,9 @@ export default {
 .blog-page {
   background-color: white;
   text-align: center;
+}
+
+.blog-link {
+  color: #5e4dbf;
 }
 </style>
