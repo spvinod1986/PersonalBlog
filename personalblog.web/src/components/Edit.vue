@@ -1,14 +1,12 @@
 <template>
   <div class="edit">
-    <form @submit="putBlog">
-      <textarea class="form-control title" v-model="title" placeholder="Enter Title here"></textarea>
-      <textarea class="form-control tags" v-model="tags" placeholder="Enter Tags here"></textarea>
-      <editor v-bind:content="content" @onUpdate="onEditorContentUpdate" :key="id"></editor>
-      <input type="checkbox" id="ispublished" v-model="isPublished" />
-      <label for="ispublished">Review and Publish?</label>
-      <br />
-      <button class="btn btn-success">Save</button>
-    </form>
+    <textarea class="form-control title" v-model="title" placeholder="Enter Title here"></textarea>
+    <textarea class="form-control tags" v-model="tags" placeholder="Enter Tags here"></textarea>
+    <editor v-bind:content="content" @onUpdate="onEditorContentUpdate" :key="id"></editor>
+    <input type="checkbox" id="ispublished" v-model="isPublished" />
+    <label for="ispublished">Review and Publish?</label>
+    <br />
+    <button class="btn btn-success" v-on:click="putBlog">Save</button>
   </div>
 </template>
 
