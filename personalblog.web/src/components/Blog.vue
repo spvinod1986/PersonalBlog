@@ -17,7 +17,33 @@
 
 <script>
 import axios from "axios";
-import hljs from "highlight.js";
+import hljs from "highlight.js/lib/highlight.js";
+hljs.registerLanguage("bash", require("highlight.js/lib/languages/bash"));
+hljs.registerLanguage("cs", require("highlight.js/lib/languages/cs"));
+hljs.registerLanguage("css", require("highlight.js/lib/languages/css"));
+hljs.registerLanguage(
+  "dockerfile",
+  require("highlight.js/lib/languages/dockerfile")
+);
+hljs.registerLanguage("java", require("highlight.js/lib/languages/java"));
+hljs.registerLanguage(
+  "javascript",
+  require("highlight.js/lib/languages/javascript")
+);
+hljs.registerLanguage("json", require("highlight.js/lib/languages/json"));
+hljs.registerLanguage(
+  "powershell",
+  require("highlight.js/lib/languages/powershell")
+);
+hljs.registerLanguage("python", require("highlight.js/lib/languages/python"));
+hljs.registerLanguage("scss", require("highlight.js/lib/languages/scss"));
+hljs.registerLanguage("sql", require("highlight.js/lib/languages/sql"));
+hljs.registerLanguage("swift", require("highlight.js/lib/languages/swift"));
+hljs.registerLanguage(
+  "typescript",
+  require("highlight.js/lib/languages/typescript")
+);
+hljs.registerLanguage("xml", require("highlight.js/lib/languages/xml"));
 
 export default {
   name: "blog",
@@ -91,20 +117,20 @@ export default {
 }
 
 .blog-content pre {
-  padding: 0.7rem 1rem !important;
-  border-radius: 5px !important;
-  background: #000 !important;
-  color: #fff !important;
-  font-size: 0.8rem !important;
-  overflow-x: scroll !important;
+  padding: 0.7rem 1rem;
+  border-radius: 5px;
+  background: #000;
+  color: #fff;
+  font-size: 0.8rem;
+  overflow-x: auto;
 }
 .blog-content pre code {
-  display: inline-block !important;
-  padding: 0 0.4rem !important;
-  border-radius: 5px !important;
-  font-size: 0.8rem !important;
-  font-weight: 400 !important;
-  background: rgba(0, 0, 0, 0.1) !important;
-  overflow-x: scroll !important;
+  display: inline-block;
+  padding: 0 0.4rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  background: rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
 }
 </style>
