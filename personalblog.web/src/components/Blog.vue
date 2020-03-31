@@ -132,4 +132,18 @@ export default {
   font-weight: 400;
   background: rgba(0, 0, 0, 0.1);
 }
+.blog-content blockquote {
+  border-left: 3px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.8);
+  padding-left: 0.8rem;
+  font-style: italic;
+}
+.blog-content blockquote p {
+  margin: 0;
+}
+.blog-content li > ol,
+.blog-content li > p,
+.blog-content li > ul {
+  margin: 0;
+}
 </style>
