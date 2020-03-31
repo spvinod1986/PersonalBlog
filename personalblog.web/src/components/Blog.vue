@@ -131,6 +131,5 @@ export default {
   font-size: 0.8rem;
   font-weight: 400;
   background: rgba(0, 0, 0, 0.1);
-  overflow-x: auto;
 }
 </style>
