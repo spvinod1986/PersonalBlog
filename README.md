@@ -1,2 +1,2 @@
 # PersonalBlog
-A personal blogging site to write about my tech learnings and mistakes
+A personal blogging site using VueJs(frontend), .NETCore(backend), MongoDB(database).
